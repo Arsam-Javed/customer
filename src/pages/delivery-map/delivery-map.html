@@ -1,0 +1,24 @@
+<ion-header style="background: transparent;">
+  <ion-searchbar #searchbar placeholder="Select Location" [(ngModel)]="searchdata"></ion-searchbar>
+</ion-header>
+<ion-content class="bg">
+
+  <div style="height: 100%; width: 100%;" id="map" #map>
+  </div>
+
+
+  <ion-footer>
+    <div>
+
+      <div>
+        <img src="assets/icon/location/pin.png" width="20px; height:10px">
+      </div>
+      <div>
+        <p>{{place}}</p>
+      </div>
+
+    </div>
+    <button ion-button class="button-style" block color="primary" (click)="confirmLocation()">Confirm Location</button>
+  </ion-footer>
+
+</ion-content>

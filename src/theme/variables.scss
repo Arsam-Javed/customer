@@ -1,0 +1,185 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: "../assets/fonts";
+
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+@import "ionic.globals";
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+
+$text-color:        #fff;
+$background-color:  transparent;
+//login screens background
+.bg{
+  background-image: url('../images/background.png');
+  background-repeat:no-repeat;
+  background-size: cover;
+  //background-position: ;
+  overflow-scrolling-y: true;
+
+}
+//swipe screens background
+.bg-onBoarding{
+  background-image: url('../images/background.png');
+  background-size: cover;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  overflow-scrolling-y: true;
+
+}
+.full-screen-image {
+  max-width: 100%;
+  max-height: 100%;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+//$colors: (
+//        primary:    #4192D4,
+//        secondary:  #57A8C3,
+//        danger:     #f53d3d,
+//        light:      #A8DFE2,
+//        dark:       #B0DBE3,
+//        lightblue:  #57A8C3,
+//        darkgrey:#2E7D82,
+//        lightgrey: #56A3B7
+//
+//);
+
+$colors: (
+        primary:    #3C9DD3,
+        secondary:  #0071BC,
+        danger:     #f53d3d,
+        light:      #9FBCCC,
+        dark:       #B0DBE3,
+        lightblue:  #6691b2,
+        darkgrey:#0071BC,
+        lightgrey: #6691b2
+
+);
+
+ion-header {
+  //background-color: #2E7D82;
+  //height: 125px !important;
+  background-color: #0071BC;
+  .toolbar-title {
+    //color: #2E7D82;
+    color: #0071BC;
+    font-weight: 300;
+    font-size: large;
+  }
+}
+
+$inputStyle: (
+
+        width: 100%,
+        height: 100px,
+        -moz-border-radius: 50px,
+        -webkit-border-radius: 50px,
+        border-radius: 10px,
+        margin-bottom: 10px,
+
+);
+.bor-bot{
+
+  border-bottom: 1px solid black;
+  width: 90%;
+  margin-left: 12px;
+  color:black;
+
+}
+.bor-top{
+
+  border-top: 1px solid black;
+  width: 90%;
+  margin-left: 12px;
+  text-align: right;
+  color: black;
+
+
+}
+
+.input-box-color{
+  background-color: white;
+}
+
+.container {
+  width: 300px;
+  margin-left:auto;
+  margin-right: auto;
+}
+ion-app.md {
+  font-size: 1.5rem !important;
+}
+.borderSolid{
+  padding-left: 10px;
+  background-color: white;
+  width:auto;
+  font-family: sans-serif;
+}
+.borderPromo{
+  border-bottom: 1px solid ;
+  padding-left: 10px;
+  background-color: white;
+  width:auto;
+  font-family: sans-serif;
+
+$item-inner:(
+        padding-right:0px
+);
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";

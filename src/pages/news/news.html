@@ -1,0 +1,16 @@
+<ion-header style="background: transparent">
+  <div text-left  padding-left padding-top padding-right padding-bottom="25px">
+    <ion-col>News</ion-col>
+  </div>
+</ion-header>
+<ion-content padding class="bg">
+  <div text-left>
+    <p *ngFor="let n of news">
+      {{n.news}}
+      <br>
+      <br>
+    </p>
+  </div>
+
+
+</ion-content>

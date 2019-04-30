@@ -1,0 +1,29 @@
+page-delivery-map {
+  .gm-style-iw{
+    color: black;
+  }
+  .searchbar-input{
+    @include placeholder(white);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid white !important;
+    padding: 5px 45px 0px 15px !important;
+    color: #fff !important;
+  }
+  .searchbar-search-icon {
+    visibility: hidden;
+  }
+  ::-webkit-input-placeholder {
+    color: #fff !important;
+  }
+  :-moz-placeholder { /* older Firefox*/
+    color: #fff !important;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #fff !important;
+  }
+  :-ms-input-placeholder {
+    color: #fff !important;
+  }
+}

@@ -1,0 +1,190 @@
+<ion-header  >
+    <button ion-button menuToggle left color="darkgrey">
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <img width="95px" height="50px" src="images/logo-name.png">
+    <div class="outermost">
+        <div #categoriesdiv class="outer">
+            <div class="inner"  [style.width]="innerWidth">
+
+                <div class="innermost" *ngFor="let cata of slider; let i = index" [id]="i" [class.activecategory]="activeCategory == cata.category._id" (click)="changeCatagory(cata)">
+                    <img class="iconimg" src="{{cata.category.icon}}">
+                    <p class="iconp">{{cata.category.title}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ion-header>
+
+<ion-menu [content]="mycontent" (ionClose)="menuClosed()" (ionOpen)="menuOpen()">
+    <ion-content *ngIf="!settingOpened">
+        <div class="bg sidemenu">
+        <div >
+        <img src="assets/menu/user.png" width="50px" height="50px" >
+        </div>
+        <div style=" padding: 13%" >
+        <h4>{{username}}</h4>
+        </div>
+        </div>
+        <ion-list>
+
+            <ion-item (click)="myOrders()">
+                <div class="iteminhamburger">
+                    <img src="assets/menu/icon1.png" width="20px" height="20px" >
+                </div>
+                <div style="display: inline-block" padding-left="8px" class="hamburgertextsize">
+                    My Orders
+                </div>
+            </ion-item>
+
+            <ion-item (click)="myNews()">
+                <div class="iteminhamburger">
+                    <img src="assets/menu/news.png" width="18px" height="18px" >
+                </div>
+                <div style="display: inline-block" padding-left="8px" class="hamburgertextsize">
+                    News
+                </div>
+            </ion-item>
+            <ion-item (click)="logout()">
+            <div class="iteminhamburger">
+            <img src="assets/menu/logout.png" width="20px" height="20px" >
+            </div>
+            <div padding-left="8px" class="hamburgertextsize">
+            Logout
+            </div>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+    <ion-content *ngIf="settingOpened">
+        <div class="bg sidemenu">
+            <div >
+                <img src="assets/favicon/setting-white.png" width="22px" height="22px" >
+            </div>
+            <div>
+                <h5>Settings</h5>
+            </div>
+        </div>
+        <ion-list>
+            <ion-item (click)="changePassword()">
+                <div class="iteminhamburger">
+                    <img src="assets/menu/icon9.png" width="20px" height="22px"  >
+                </div>
+                <div padding-left="8px" class="hamburgertextsize">
+                    Change Password
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-footer>
+            <p>App version 1.0.1</p>
+        </ion-footer>
+    </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
+
+
+<ion-content>
+<ion-slides (ionSlideDidChange)="slideChanged()">
+        <ion-slide *ngFor="let slide of slider">
+            <ion-scroll
+                    direction="y"
+                    scroll="true"
+                    [style.height]="slide.products.length * 100 + addition + 'px'"
+            >
+                <div  class="productsouter" *ngFor="let prod of slide.products; let i = index" [style.background-image]="safeStyle(i)" [style.height]="(selectingProduct && (prod._id == selectedProduct._id)) ? '120px' : '100px'" (click)="addToCart(prod, slide)">
+                    <ion-row *ngIf="!(prod._id == selectedProduct._id)">
+                        <ion-col col-3>
+                            <p class="productsprice"><br>Rs. {{prod.price}}&nbsp;&nbsp;<br><br></p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p class="productsname">
+                                {{ prod.title}}
+                            </p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <div *ngIf="prod.quantity" style="text-align:center;border: 1px solid white; border-radius: 50% ; color:black;height: 25px; width: 25px; margin-top:37px; background-color: white; padding-top:1px">
+                                {{prod.quantity}}
+                            </div>
+                        </ion-col>
+                        <ion-col col-2>
+                            <img *ngIf="prod.dry == 1" class="productsdry" src="assets/dry.png">
+                        </ion-col>
+                    </ion-row>
+                    <div  *ngIf="(prod._id == selectedProduct._id)" style="background-color: #4CA3D8;color: white">
+                        <ion-row>
+                            <ion-col col-2 *ngIf="screenwidth > 320">
+                            </ion-col>
+                            <ion-col col-1 *ngIf="screenwidth <= 320">
+                            </ion-col>
+                            <ion-col col-7 >
+                                <p style="font-size: 1.6rem !important;float: left;"><b>{{selectedProduct.title}}</b></p>
+                            </ion-col>
+                            <ion-col col-2></ion-col>
+                            <ion-col col-1 style="    margin: 13px 0px 0px -18px;"><img (click)="removeselectedproduct($event)" src="assets/icon/up-arrow.png" height="20px" width="20px"></ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-2 *ngIf="screenwidth > 320">
+                            </ion-col>
+                            <ion-col col-1 *ngIf="screenwidth <= 320">
+                            </ion-col>
+                            <ion-col style="float: left">
+                                <p style="font-size: 1.3rem;width: 65px">QUANTITY</p>
+                            </ion-col>
+                            <ion-col>
+                                <p style="text-align: center"> x </p>
+                            </ion-col>
+                            <ion-col> <p style="font-size: 1.27rem;">PRICE</p></ion-col>
+                            <ion-col> <p style="text-align: center"> = </p></ion-col>
+                            <ion-col style="margin-right: 18px;font-size: 1.3rem;"> <p style="width: 65px">SUBTOTAL</p></ion-col>
+                        </ion-row>
+                        <div>
+                            <ion-row>
+                                <ion-col col-2 *ngIf="screenwidth > 320">
+                                </ion-col>
+                                <ion-col col-1 *ngIf="screenwidth <= 320">
+                                </ion-col>
+                                <ion-col col-3>
+                                    <ion-row style="margin-top: 4px;margin-left: 2px;">
+                                        <ion-col col-4><img (click)="decreaseQuantity($event)" height="20" width="20" style="min-width: 20px;min-height: 20px; margin-left: -15px" src="assets/favicon/minus-white.png"></ion-col>
+                                        <ion-col col-2><div style="margin-left: -14px; width: 35px">{{selectedProduct.quantity}}</div></ion-col>
+                                        <ion-col col-4><img (click)="increaseQuantity()" height="20" width="20" style="min-width: 20px;min-height: 20px; margin-left: 7px" src="assets/favicon/plus-white.png"> </ion-col>
+                                    </ion-row>
+                                </ion-col>
+                                <ion-col col-1 [style.margin-left]="selectedProduct.price.length <= 2 ? '-8px' : '-5px'"></ion-col>
+                                <ion-col col-2 style="padding-left: 0px !important;"><p style="font-weight: bold;font-size: 1.3rem;" [style.width]="screenwidth <= 334  ? '70px' : '70px'">PKR {{selectedProduct.price}}</p></ion-col>
+                                <ion-col ></ion-col>
+                                <ion-col style="margin-right: 18px;" [style.margin-left]="screenwidth <= 440  ? '-35px' : ''"><p style="font-weight: bold;font-size: 1.27rem;width: 65px !important;text-align: center !important;">PKR {{selectedProduct.price * selectedProduct.quantity}}</p></ion-col>
+                            </ion-row>
+                        </div>
+
+                    </div>
+                </div>
+            </ion-scroll>
+        </ion-slide>
+</ion-slides>
+</ion-content>
+<ion-footer>
+    <div>
+        <ion-row (click)="movetobasket()">
+
+            <ion-col>
+                <div>
+                    <img src="assets/favicon/my-basket.png" width="20px; height:10px">
+                </div>
+                <div>
+                    <p>MY BASKET</p>
+                </div>
+            </ion-col>
+            <ion-col *ngIf="!promoApplied">
+                <p>PKR {{total}}</p>
+            </ion-col>
+            <ion-col *ngIf="promoApplied">
+                <p>(Promo) PKR {{total-discount}}</p>
+            </ion-col>
+        </ion-row>
+
+    </div>
+    <button ion-button class="button-style" block  style="height: 45px;box-shadow:none;-webkit-box-shadow: none" color="darkgrey" (click)="check()">CheckOut</button>
+</ion-footer>
